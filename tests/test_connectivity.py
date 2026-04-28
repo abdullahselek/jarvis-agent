@@ -1,9 +1,10 @@
 """Verify hermes-agent can reach the Ollama API."""
 
+import os
 import urllib.request
 import json
 
-OLLAMA_URL = "http://host.docker.internal:11434"
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 
 # Required models from the plan
 REQUIRED_MODELS = {"gemma4", "qwen3.6"}
