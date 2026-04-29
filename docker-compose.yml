@@ -10,7 +10,7 @@ services:
     build: .
     container_name: jarvis-agent-test
     network_mode: host
-    command: python tests/test_connectivity.py
+    command: /app/.venv/bin/python tests/test_connectivity.py
     volumes:
       - ./tests:/app/tests
     profiles:
