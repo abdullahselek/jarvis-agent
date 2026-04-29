@@ -88,5 +88,27 @@ Permitted paths (default): `~/Repositories`
 |-------|--------|
 | 1. Foundation & Connectivity | Done |
 | 2. Safety Implementation | Done |
-| 3. Multi-Agent Configuration | TODO |
+| 3. Multi-Agent Configuration | Done |
 | 4. Validation & Testing | TODO |
+
+## Router Keywords
+
+| Profile | Keywords |
+|---------|----------|
+| **coder** | `code`, `coding`, `develop`, `implement`, `fix`, `debug`, `refactor`, `api`, `bug`, `test`, `deploy` |
+| **analyst** | `analyze`, `summarize`, `compare`, `report`, `research`, `data`, `statistics`, `extract`, `find` |
+| **general** | Default — all other inputs |
+
+## Run the Agent
+
+```bash
+docker compose up jarvis-agent
+```
+
+## Run All Tests
+
+```bash
+docker compose --profile test up test                           # Ollama connectivity
+docker exec jarvis-agent /app/.venv/bin/python /app/test_file_guard.py    # File guard
+docker exec jarvis-agent /app/.venv/bin/python /app/test_routing.py        # Router
+```
