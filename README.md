@@ -54,7 +54,7 @@ Permitted paths (default): `~/Repositories`
 
 4. Run tests:
    ```bash
-   docker compose --profile test up test          # connectivity
+   docker compose --profile test up test
    docker exec jarvis-agent python3 /app/test_file_guard.py   # file guard
    ```
 
@@ -75,21 +75,14 @@ Permitted paths (default): `~/Repositories`
 │       └── router.py            # Intent-to-profile routing (Phase 3)
 ├── tests/
 │   ├── test_connectivity.py     # Ollama API + model verification
-│   └── test_file_guard.py       # Path validator unit tests
+│   ├── test_file_guard.py       # Path validator unit tests
+│   ├── test_routing.py          # Intent classifier unit tests
+│   └── test_integration.py      # Consent, security, routing
 ├── Dockerfile
 ├── docker-compose.yml
 ├── pyproject.toml
 └── main.py
 ```
-
-## Phase Progress
-
-| Phase | Status |
-|-------|--------|
-| 1. Foundation & Connectivity | Done |
-| 2. Safety Implementation | Done |
-| 3. Multi-Agent Configuration | Done |
-| 4. Validation & Testing | TODO |
 
 ## Router Keywords
 
@@ -108,7 +101,8 @@ docker compose up jarvis-agent
 ## Run All Tests
 
 ```bash
-docker compose --profile test up test                           # Ollama connectivity
+docker compose --profile test up test                           # Integration tests
 docker exec jarvis-agent /app/.venv/bin/python /app/test_file_guard.py    # File guard
 docker exec jarvis-agent /app/.venv/bin/python /app/test_routing.py        # Router
+docker exec jarvis-agent /app/.venv/bin/python /app/test_integration.py    # Consent, security, routing
 ```
