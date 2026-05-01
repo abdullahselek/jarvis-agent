@@ -8,7 +8,7 @@ profiles:
       Always seek user consent before taking any action.
 
   coder:
-    model: "qwen3.6"
+    model: "qwen3.6:35b"
     base_url: "http://localhost:11434/v1"
     persona: >
       You are a senior software engineer. You write clean, well-tested code
