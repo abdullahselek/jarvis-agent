@@ -8,11 +8,13 @@ CONFIG_PATH = os.path.expanduser("~/.hermes/config.yaml")
 
 
 def configure_hooks():
-    """Uncomment and update the hooks section in hermes config."""
+    """Uncomment hooks and configure ollama as the inference backend."""
     with open(CONFIG_PATH, "r") as f:
         content = f.read()
 
-    # Uncomment the hooks section (lines starting with "# hooks:", "#   pre_tool_call:", etc.)
+    # ── Hooks section ──────────────────────────────────────────────────
+
+    # Uncomment the hooks section keys (only uncomment actual YAML keys)
     content = re.sub(
         r"^(# )hooks:", r"hooks:", content, flags=re.MULTILINE
     )
@@ -38,7 +40,7 @@ def configure_hooks():
         r"^(# )  subagent_stop:", r"  subagent_stop:", content, flags=re.MULTILINE
     )
     content = re.sub(
-        r"^(# )hooks_auto_accept", r"hooks_auto_accept", content, flags=re.MULTILINE
+        r"^(# )hooks_auto_accept:", r"hooks_auto_accept:", content, flags=re.MULTILINE
     )
 
     # Update the pre_tool_call matcher to cover all filesystem tools
@@ -53,10 +55,31 @@ def configure_hooks():
         "/usr/local/bin/hermes-hooks/block_file_access.sh",
     )
 
+    # Fix a broken comment line in the sampling section
+    content = content.replace(
+        "      timeout: 30             # LLM call timeout (seconds)",
+        "# timeout: 30             # LLM call timeout (seconds)",
+    )
+
+    # ── Ollama backend ─────────────────────────────────────────────────
+    # Change the default model and provider to use local Ollama
+    content = content.replace(
+        '  default: "anthropic/claude-opus-4.6"',
+        '  default: "ollama/gemma4:31b"',
+    )
+    content = content.replace(
+        '  provider: "auto"',
+        '  provider: "custom"',
+    )
+    content = content.replace(
+        '  base_url: "https://openrouter.ai/api/v1"',
+        '  base_url: "http://localhost:11434/v1"',
+    )
+
     with open(CONFIG_PATH, "w") as f:
         f.write(content)
 
-    print("Hermes hooks configured successfully")
+    print("Hermes hooks and ollama configured successfully")
 
 
 if __name__ == "__main__":
