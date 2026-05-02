@@ -96,6 +96,7 @@ Permitted paths (default): `~/Repositories`
 
 ```bash
 docker compose up jarvis-agent
+docker compose run -it jarvis-agent
 ```
 
 ## Run All Tests
