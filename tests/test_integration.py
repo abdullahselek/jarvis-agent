@@ -74,7 +74,7 @@ def test_routing_default_general():
 
 def test_routing_returns_full_profile():
     profile = get_profile("fix the bug")
-    assert profile["model"] == "qwen3.6"
+    assert profile["model"] == "qwen3.6:35b"
     assert "persona" in profile
 
     profile = get_profile("analyze this")
