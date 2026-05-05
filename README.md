@@ -7,7 +7,7 @@ A local-first, multi-agent AI system that uses [hermes-agent](https://github.com
 ```
 User
   └─► Supervisor Agent (gemma4:31b)
-       ├─► /coder       (qwen3.6)      — engineering tasks
+       ├─► /coder       (qwen3.6:35b)      — engineering tasks
        ├─► /analyst     (gemma4:e4b)    — data analysis & summarization
        └─► /general     (gemma4:31b)    — default chat & coordination
 ```
@@ -43,7 +43,7 @@ Permitted paths (default): `~/Repositories`
 2. Pull required models:
    ```bash
    ollama pull gemma4:31b
-   ollama pull qwen3.6
+   ollama pull qwen3.6:35b
    ollama pull gemma4:e4b
    ```
 
