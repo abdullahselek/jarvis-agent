@@ -5,6 +5,10 @@ services:
     network_mode: host
     stdin_open: true
     tty: true
+    environment:
+      - GITHUB_ROOT=/home/${USER}/Repositories/Github
+    volumes:
+      - /home/${USER}/Repositories/Github:/repos/github:ro
 
   test:
     build: .
