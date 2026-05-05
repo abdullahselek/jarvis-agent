@@ -29,6 +29,7 @@ def main():
     result = subprocess.run(
         ["hermes", "chat", "-m", f"ollama/{profile['model']}", "--yolo"],
         input=message,
+        text=True,
         env=env,
         cwd=os.getcwd(),
     )
